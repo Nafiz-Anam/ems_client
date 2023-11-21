@@ -8,7 +8,6 @@ const Login = lazy(() => import("../page/Auth/Login"));
 const Users = lazy(() => import("../page/Users/Users"));
 const PublicRoute = lazy(() => import("./PublicRoute"));
 const PrivateRoute = lazy(() => import("./PrivateRoute"));
-const Experts = lazy(() => import("../page/Expert/Experts"));
 const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const VerifyAccount = lazy(() => import("../page/Auth/Verify"));
@@ -19,33 +18,19 @@ const Registration = lazy(() => import("../page/Auth/Registration"));
 const UsersDetails = lazy(() => import("../page/Users/UserDetails"));
 const LoginHistory = lazy(() => import("../page/Users/loginHistory"));
 const UserBookings = lazy(() => import("../page/Users/UserBookings"));
-const ExpertOrders = lazy(() => import("../page/Expert/ExpertOrders"));
 const RefundPolicy = lazy(() => import("../page/Setting/RefundPolicy"));
 const SupportChart = lazy(() => import("../page/Support/SupportChart"));
-const ExpertDetails = lazy(() => import("../page/Expert/ExpertDetails"));
 const RecoverAccount = lazy(() => import("../page/Auth/RecoverAccount"));
 const RecoverPassword = lazy(() => import("../page/Auth/ChangePassword"));
 const AddPassword = lazy(() => import("../page/Auth/AddPassword"));
 const PrivacyPolicy = lazy(() => import("../page/Setting/PrivacyPolicy"));
 const ChangePassword = lazy(() => import("../page/Setting/ChangePassword"));
 const TermsCondition = lazy(() => import("../page/Setting/TermsCondition"));
-const ExpertsRequest = lazy(() => import("../page/Request/ExpertsRequest"));
 const JobPostDetails = lazy(() => import("../page/JobPost/JobPostDetails"));
-const BookingDetails = lazy(() => import("../page/Bookings/BookingDetails"));
-const PaymentGateway = lazy(() => import("../page/Payment/Payment-gateway"));
-const AllCategories = lazy(() => import("../page/Categories/AllCategories"));
-const SubCategories = lazy(() => import("../page/Categories/SubCategories"));
 const SentNotification = lazy(() => import("../page/Setting/SentNotification"));
-// const UserBookingDetails = lazy(() => import("../page/Users/UserBookingDetails"));
+
 const GlobalLoader = lazy(() =>
     import("../components/share/loading/GlobalLoader")
-);
-// const ExpertsOrdersDetails = lazy(() => import("../page/Expert/ExpertsOrdersDetails"));
-const ExpertRequestDetails = lazy(() =>
-    import("../page/Request/ExpertRequestDetails")
-);
-const ExpertServicesRequest = lazy(() =>
-    import("../page/Request/ExpertServicesRequest")
 );
 
 export const routes = createBrowserRouter([
@@ -63,17 +48,11 @@ export const routes = createBrowserRouter([
             { index: true, element: <Home /> },
             { path: "/home", element: <Home /> },
 
-            // categories routes
-            { path: "/all-categories", element: <AllCategories /> },
-            { path: "/sub-categories", element: <SubCategories /> },
-            { path: "/sub-categories", element: <SubCategories /> },
-
             // job post routes
             { path: "/job-post/*", element: <JobPost /> },
             { path: "/job-post/details/:id", element: <JobPostDetails /> },
 
             // users routes
-            // { path: '/all-users/*', element: <Users /> },
             { path: "/all-users/", element: <Users /> },
             { path: "/users/login-history/:id", element: <LoginHistory /> },
             { path: "/all-users/details/:id", element: <UsersDetails /> },
@@ -86,45 +65,8 @@ export const routes = createBrowserRouter([
                 element: <UserBookings />,
             },
 
-            // expert routes
-            { path: "/experts/all-expert/*", element: <Experts /> },
-            {
-                path: "/experts/all-expert/details/:id",
-                element: <ExpertDetails />,
-            },
-            {
-                path: "/experts/all-expert/details/experts-all-orders/:expertId",
-                element: <Bookings />,
-            },
-            {
-                path: "/experts/all-expert/details/experts-all-orders/:userId/order-details/:detailsId",
-                element: <ExpertOrders />,
-            },
-
             // support chart routes
             { path: "/support-chart", element: <SupportChart /> },
-
-            // booking routes
-            { path: "/booking/*", element: <Bookings /> },
-            {
-                path: "/booking/booking-details/:id",
-                element: <BookingDetails />,
-            },
-
-            // /expert-request
-            { path: "/expert-request", element: <ExpertsRequest /> },
-            { path: "/expert-request/:id", element: <ExpertRequestDetails /> },
-            {
-                path: "/expert-services-request",
-                element: <ExpertServicesRequest />,
-            },
-            {
-                path: "/expert-services-request/:id",
-                element: <ExpertServicesRequest />,
-            },
-
-            // payment gateway routes
-            { path: "/payment-gateway/*", element: <PaymentGateway /> },
 
             // setting routes
             { path: "/setting/change-password", element: <ChangePassword /> },
