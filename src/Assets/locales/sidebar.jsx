@@ -48,9 +48,9 @@ export const SidebarData = [
                 ],
             },
             {
-                id: 31231232,
+                id: 31231235,
                 name: "Payouts",
-                url: "/all-payouts",
+                url: "/payouts/all-payouts",
                 icon: (
                     <PaymentIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
                 ),

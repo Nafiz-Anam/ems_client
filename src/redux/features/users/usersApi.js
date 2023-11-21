@@ -10,7 +10,25 @@ const usersApi = api.injectEndpoints({
                 body: {
                     perpage: 10,
                     page: data.page,
-                    type: data.type,
+                    search: data?.search,
+                },
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setUsers(result.data.data));
+                } catch (error) {
+                    console.log("error for user api slice", error);
+                }
+            },
+        }),
+        getBanks: builder.mutation({
+            query: (data) => ({
+                url: "/employee/account_list",
+                method: "POST",
+                body: {
+                    perpage: 10,
+                    page: data.page,
                     search: data?.search,
                 },
             }),
@@ -45,18 +63,11 @@ const usersApi = api.injectEndpoints({
                 body: { user_id: data.id, status: data.status },
             }),
         }),
-        // userLoginHistory: builder.mutation({
-        //     query: (data) => ({
-        //         url: "/user/login/history",
-        //         method: "POST",
-        //         body: { id: data },
-        //     }),
-        // }),
     }),
 });
 export const {
     useGetUsersMutation,
     useUpdateStatusMutation,
     useGetUsersDetailsMutation,
-    // useUserLoginHistoryMutation,
+    useGetBanksMutation,
 } = usersApi;

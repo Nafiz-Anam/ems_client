@@ -8,7 +8,7 @@ import Paginate from "../../components/share/Paginate/Paginate";
 import StageLoading from "../../components/share/loading/StageLoading";
 import { useGetUsersMutation } from "../../redux/features/users/usersApi";
 
-const Users = () => {
+const PayoutTable = () => {
     const [search, setSearch] = useState();
     const [rightPage, setRightPage] = useState(1);
     const [paginateData, setPaginateData] = useState([]);
@@ -107,4 +107,4 @@ const Users = () => {
     );
 };
 
-export default Users;
+export default PayoutTable;
