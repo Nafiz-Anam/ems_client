@@ -1,0 +1,121 @@
+.circle-wrap {
+  width: 60px;
+  height: 60px;
+  background: #fefcff;
+  border-radius: 50%;
+  border: 2px solid #e9ecef;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.mask .fill {
+  clip: rect(0px, 30px, 60px, 0px);
+  background-color: #0d0d10;
+}
+.circle-wrap .circle .mask {
+  clip: rect(0px, 60px, 60px, 30px);
+}
+
+.mask.full,
+.circle .fill {
+  animation: fill ease-in-out 3s;
+  transform: rotate(180deg);
+}
+
+@keyframes fill {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+.circle-wrap .inside-circle {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #ffffff;
+  margin-top: 4px;
+  margin-left: 4px;
+  position: absolute;
+  z-index: 100;
+}
+
+table th:first-child {
+  border-radius: 8px 0 0 0px;
+}
+
+table th:last-child {
+  border-radius: 0 8px 0px 0;
+}
+/* table tbody tr td:first-child {
+border-radius: 0px 0 0 10px;
+}
+
+table tbody tr td:last-child {
+border-radius: 0 0px 10px 0;
+} */
+tbody:last-child {
+  border-radius: 10px;
+}
+
+.AnimatedNumberItem__number {
+  color: #000;
+  font-family: Inter !important;
+  font-size: 24px !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+}
+
+/* Hide the scrollbar for the specific container */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 0rem; /* Change this value as per your preference */
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+.box {
+  width: 360px;
+  height: 140px;
+  flex-shrink: 0;
+  border-radius: 50px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background: #fff;
+  box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.25);
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.name_box {
+  border: solid 1px #000;
+  position: absolute;
+  width: 200px;
+  height: 40px;
+  top: 20%;
+  border-radius: 25px;
+  box-shadow: 0px 3px 2px 0px rgba(0, 0, 0, 0.15) inset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.circle-container {
+  position: absolute;
+  bottom: 20%;
+}
