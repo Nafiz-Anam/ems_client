@@ -2,11 +2,12 @@ import {
     ChatBoldIcon,
     ClipboardIcon,
     DashboardIcon,
+    PaymentIcon,
     SettingIcon,
     UserIcon,
 } from "./SideNavigationIcons";
 
-export const sidebarDatas = [
+export const SidebarData = [
     {
         id: 13123,
         title: "MENU",
@@ -29,24 +30,29 @@ export const sidebarDatas = [
             {
                 id: 31231232,
                 name: "Employees",
-                url: "/all-users",
+                url: "",
                 icon: (
                     <UserIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
                 ),
                 submenu: [
                     {
                         id: 2313,
-                        name: "Bank Accounts",
-                        url: "/job-post/on-process",
+                        name: "All Employees",
+                        url: "/employees/all_employees",
+                    },
+                    {
+                        id: 2313,
+                        name: "All Bank Accounts",
+                        url: "/employees/bank_accounts",
                     },
                 ],
             },
             {
                 id: 31231232,
                 name: "Payouts",
-                url: "/all-users",
+                url: "/all-payouts",
                 icon: (
-                    <UserIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
+                    <PaymentIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
                 ),
                 submenu: [],
             },
@@ -66,7 +72,6 @@ export const sidebarDatas = [
                     { id: 224, name: "Complete ", url: "/job-post/completed" },
                 ],
             },
-
             {
                 id: 1234,
                 name: "Support Chat",

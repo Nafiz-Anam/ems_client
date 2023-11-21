@@ -1,7 +1,7 @@
 import React from "react";
 import ActiveRoute from "../utils/ActiveRoute";
 import logo from "../Assets/Svg/logo.svg";
-import { sidebarDatas } from "../Assets/locales/sidebar";
+import { SidebarData } from "../Assets/locales/Sidebar";
 import { useSidebarContext } from "../context/SidebarProvider";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +32,7 @@ const Sidebar = () => {
                         </div>
                     </div>
                     <ul className="mt-6">
-                        {sidebarDatas?.map((data) => {
+                        {SidebarData?.map((data) => {
                             return <Items data={data} key={Math.random()} />;
                         })}
                     </ul>
@@ -91,7 +91,7 @@ const MainItems = ({ data }) => {
     const { close, isSmallOpen } = useSidebarContext();
     return (
         <>
-            <div
+            <div className="py-3"
                 onClick={(e) => {
                     e.stopPropagation();
                 }}

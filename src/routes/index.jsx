@@ -13,7 +13,6 @@ const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const VerifyAccount = lazy(() => import("../page/Auth/Verify"));
 const VerifyOTP = lazy(() => import("../page/Auth/VerifyOtp"));
 const PageNotFound = lazy(() => import("../page/PageNotFound"));
-const Bookings = lazy(() => import("../page/Bookings/Bookings"));
 const Registration = lazy(() => import("../page/Auth/Registration"));
 const UsersDetails = lazy(() => import("../page/Users/UserDetails"));
 const LoginHistory = lazy(() => import("../page/Users/loginHistory"));
@@ -53,13 +52,9 @@ export const routes = createBrowserRouter([
             { path: "/job-post/details/:id", element: <JobPostDetails /> },
 
             // users routes
-            { path: "/all-users/", element: <Users /> },
+            { path: "/employees/*", element: <Users /> },
             { path: "/users/login-history/:id", element: <LoginHistory /> },
             { path: "/all-users/details/:id", element: <UsersDetails /> },
-            {
-                path: "/users/details/user-all-bookings/:id",
-                element: <Bookings />,
-            },
             {
                 path: "/all-users/details/users-all-booking/:userId/booking-details/:detailsId",
                 element: <UserBookings />,
