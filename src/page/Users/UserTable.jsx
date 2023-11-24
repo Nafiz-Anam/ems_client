@@ -85,7 +85,7 @@ const UserTable = () => {
                         <TableTemp
                             rightPage={rightPage}
                             btn={false}
-                            linkUrl="/all-users/details"
+                            linkUrl="/employees/details"
                             customID={true}
                             assignLinkOnHeader="id_img1"
                             linkOnly={true}

@@ -14,20 +14,20 @@ const BankAccounts = () => {
     const deId = decodeURIComponent(id);
 
     const tableHeader = [
-        { name: "Username", field: "user_name" },
-        { name: "Device Name", field: "device_name" },
-        { name: "Country", field: "country" },
-        { name: "Browser", field: "browser" },
-        { name: "Ip address", field: "ip_address" },
-        { name: "login at", field: "created_at" },
+        { name: "Employee Name", field: "employee_name" },
+        { name: "Bank Name", field: "bank_name" },
+        { name: "Account Holder", field: "account_holder" },
+        { name: "Account Number", field: "account_number" },
+        { name: "Bank Branch", field: "bank_branch" },
+        { name: "Swift Code", field: "bank_swift_code" },
     ];
     const fieldToShow = [
-        "user_name",
-        "device_name",
-        "country",
-        "browser",
-        "ip_address",
-        "created_at",
+        "employee_name",
+        "bank_name",
+        "account_holder",
+        "account_number",
+        "bank_branch",
+        "bank_swift_code",
     ];
     const [getBanks, { isError, isLoading, isSuccess }] = useGetBanksMutation();
     const loadDataFn = async () => {
@@ -41,11 +41,11 @@ const BankAccounts = () => {
 
     return (
         <div className="">
-            <TableHeader title={"Login History"} />
+            <TableHeader title={"Bank Accounts"} />
             <Container>
                 <div className="md:flex mb-[37px] mt-[30px] items-center justify-between">
                     <div className="mb-4 md:mb-0">
-                        <p className="mb-2 text-xl font-bold">Login history</p>
+                        <p className="mb-2 text-xl font-bold">Bank Accounts</p>
                     </div>
                 </div>
                 <div className="mb-8 overflow-x-scroll scrollbar-hide">
@@ -57,17 +57,16 @@ const BankAccounts = () => {
                     >
                         <TableTemp
                             btn={false}
-                            linkUrl="/all-users/details"
+                            customIdFieldName="employee_id"
+                            linkUrl="/employees/details"
                             customID={true}
-                            assignLinkOnHeader="id_img1"
                             linkOnly={true}
-                            linkFieldName="full_name"
-                            isImage={true}
+                            linkFieldName="employee_name"
+                            isImage={false}
                             isImageLink={false}
                             tableHead={tableHeader}
                             data={data?.data?.data}
                             fieldsToShow={fieldToShow}
-                            // actionData={ActionData}
                         />
                     </StageLoading>
                 </div>

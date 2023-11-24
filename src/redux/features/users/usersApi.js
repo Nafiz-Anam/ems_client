@@ -45,7 +45,7 @@ const usersApi = api.injectEndpoints({
             query: (data) => ({
                 url: "/employee/details",
                 method: "POST",
-                body: { user_id: data },
+                body: { employee_id: data },
             }),
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {

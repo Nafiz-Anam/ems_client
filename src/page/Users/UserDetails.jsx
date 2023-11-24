@@ -36,21 +36,6 @@ const UsersDetails = () => {
     { name: "Canceled Booking", value: "৳2,580", url: "some url", icon: <BookingIconUserDetails /> },
     { name: "Completed Booking", value: "৳2,580", url: "some url", icon: <BookingIconUserDetails /> },
   ]
-  // const ref = useRef(null)
-  // const handleForm = (e) => {
-  //   e.preventDefault()
-  //   const form = e.target
-  //   const first_name = form.first_name.value;
-  //   const last_name = form.last_name.value;
-  //   const username = form.username.value;
-  //   const date_of_birth = form.date_of_birth.value;
-  //   const age = form.age.value;
-  //   const email = form.email.value;
-  //   const phone_number = form.phone_number.value;
-  //   const address = form.address.value;
-  //   const data = { first_name, last_name, username, date_of_birth, age, email, phone_number, address }
-  //   // console.log(data);
-  // }
   const BlockFn = (item) => {
     setModalContent(null)
     dispatch(showModal({ show: true, title: details?.status === "active" ? "block" : "active", width: "max-w-lg", selectedItem: { ...item, name: item.full_name }, }))
@@ -95,50 +80,6 @@ const UsersDetails = () => {
                     <img src="https://portal.bilardo.gov.tr/assets/pages/media/profile/profile_user.jpg" className='w-full h-full max-h-[330px] rounded-md' alt="" />
                   </div>
                 </div>
-                <div className="grid grid-cols-2 gap-4 duration-300 md:gap-2 xl:gap-4 md:grid-cols-4">
-                  <div className="">
-                    <p className='mb-1'>All Booking</p>
-                    <div className="bg-[#63C054] bg-opacity-40  text-[#63C054] rounded-md cursor-pointer">
-                      <Link to={`/users/details/user-all-bookings/${encodeURIComponent(details.id)}`}
-                        className="flex items-center justify-center gap-2 py-6 ">
-                        <BookingIcon className='w-10 h-10' colorCode={"#63C054"} />
-                        <p>All Booking</p>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="">
-                    <p className='mb-1'>Cancel Booking</p>
-                    <div className="text-red-500 bg-red-500 rounded-md bg-opacity-40">
-                      <div className="flex items-center justify-center gap-2 py-6 cursor-pointer">
-                        <BookingIcon className='w-10 h-10' colorCode={"#F76868"} />
-                        <p>Cancel Booking</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="">
-                    <p className='mb-1'>  User Logins  History </p>
-                    <div className="bg-[#3B76E1] bg-opacity-30  text-[#3B76E1] rounded-md">
-                      <Link to={`/users/login-history/${encodeURIComponent(details?.id)}`}
-                        className="flex items-center justify-center gap-2 py-6 cursor-pointer">
-                        <BookingIcon className='w-10 h-10' colorCode={"#3B76E1"} />
-                        <p>Logins History</p>
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="">
-                    <p className='mb-1'>{details.status === "active" ? "Block user" : "Unblock user"}</p>
-                    <div className={`${details.status === "active" ? "text-red-500 bg-red-500" : "bg-[#3B76E1] text-[#3B76E1]"}  rounded-md bg-opacity-40`}>
-                      <div
-                        onClick={() => BlockFn(details)}
-                        className="flex items-center justify-center gap-2 py-6 cursor-pointer">
-                        {!details.status === "active" ? <BlockIcon className='w-10 h-10' colorCode={"#F76868"} /> :
-                          <CgUnblock colorCode={"#F76868"} />
-                        }
-                        <p> {details.status === "active" ? "Block" : "UnBlock"} </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </section>
               {/* end user info */}
 
@@ -149,10 +90,7 @@ const UsersDetails = () => {
                     User Information
                   </p>
                   <div className="flex items-center gap-2">
-                    <PdfIcon className="w-2 h-6 text-blue-400" />
-                    <p className="text-blue-400 ">
-                      Document  {/* //! missing */}
-                    </p>
+                    
                   </div>
                 </div>
                 <form
@@ -163,7 +101,7 @@ const UsersDetails = () => {
                     <div className="">
                       <p className='mb-1'>Full Name</p> {/* //! missing */}
                       <input
-                        value={details?.full_name}
+                        value={details?.name}
                         disabled
                         required
                         name='first_name'
