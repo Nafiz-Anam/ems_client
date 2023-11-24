@@ -1,6 +1,5 @@
 import React from "react";
 import ActiveRoute from "../utils/ActiveRoute";
-import logo from "../Assets/Svg/logo.svg";
 import { SidebarData } from "../Assets/locales/Sidebar";
 import { useSidebarContext } from "../context/SidebarProvider";
 import { Link, useLocation } from "react-router-dom";
@@ -25,9 +24,8 @@ const Sidebar = () => {
                 <div className="sticky top-0 px-2 z-[50]">
                     <div className="flex flex-col items-center justify-center h-20">
                         <div className="flex gap-2 mr-6">
-                            <img src={logo} alt="" />
                             <h2 className="pt-3 text-2xl font-bold text-center text-white ">
-                                Xpert
+                                EMS App.
                             </h2>
                         </div>
                     </div>
