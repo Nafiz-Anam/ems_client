@@ -56,31 +56,31 @@ export const SidebarData = [
                 ),
                 submenu: [],
             },
-            {
-                id: 23123123,
-                name: "Job Posts",
-                url: "",
-                icon: (
-                    <ClipboardIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
-                ),
-                submenu: [
-                    {
-                        id: 2313,
-                        name: "On Process",
-                        url: "/job-post/on-process",
-                    },
-                    { id: 224, name: "Complete ", url: "/job-post/completed" },
-                ],
-            },
-            {
-                id: 1234,
-                name: "Support Chat",
-                url: "/support-chart",
-                icon: (
-                    <ChatBoldIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
-                ),
-                submenu: [],
-            },
+            // {
+            //     id: 23123123,
+            //     name: "Job Posts",
+            //     url: "",
+            //     icon: (
+            //         <ClipboardIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
+            //     ),
+            //     submenu: [
+            //         // {
+            //         //     id: 2313,
+            //         //     name: "On Process",
+            //         //     url: "/job-post/on-process",
+            //         // },
+            //         // { id: 224, name: "Complete ", url: "/job-post/completed" },
+            //     ],
+            // },
+            // {
+            //     id: 1234,
+            //     name: "Support Chat",
+            //     url: "#",
+            //     icon: (
+            //         <ChatBoldIcon className="focus:fill-white active:fill-white group-hover:fill-white" />
+            //     ),
+            //     submenu: [],
+            // },
         ],
     },
     {
