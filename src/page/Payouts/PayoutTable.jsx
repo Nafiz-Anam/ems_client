@@ -6,7 +6,7 @@ import Container from "../../components/share/ui/Container";
 import TableHeader from "../../components/share/ui/TableHeader";
 import Paginate from "../../components/share/Paginate/Paginate";
 import StageLoading from "../../components/share/loading/StageLoading";
-import { useGetUsersMutation } from "../../redux/features/users/usersApi";
+import { useGetPayoutsMutation } from "../../redux/features/users/usersApi";
 
 const PayoutTable = () => {
     const [search, setSearch] = useState();
@@ -14,14 +14,14 @@ const PayoutTable = () => {
     const [paginateData, setPaginateData] = useState([]);
 
     const { data } = useSelector((state) => state.users);
-    const [getUsers, { isError, isLoading, isSuccess, error }] =
-        useGetUsersMutation();
+    const [getPayouts, { isError, isLoading, isSuccess, error }] =
+        useGetPayoutsMutation();
 
     const loadDataFn = async (page) => {
         if (search?.client) {
             setRightPage(1);
         }
-        const data = await getUsers({
+        const data = await getPayouts({
             page,
             search: search?.client,
         });
@@ -39,19 +39,12 @@ const PayoutTable = () => {
     };
 
     const tableHead = [
-        { name: "Username", field: "employee_name" },
-        { name: "Account balance", field: "account_balance" },
+        { name: "Employee Name", field: "employee_name" },
         { name: "Payout Month", field: "month" },
         { name: "Amount", field: "amount" },
-        { name: "Cleared At", field: "created_at" },
+        { name: "Paid At", field: "created_at" },
     ];
-    const fieldsToShow = [
-        "employee_name",
-        "account_balance",
-        "month",
-        "amount",
-        "created_at",
-    ];
+    const fieldsToShow = ["employee_name", "month", "amount", "created_at"];
 
     return (
         <div className="bg-secondary">
@@ -88,7 +81,9 @@ const PayoutTable = () => {
                             linkFieldName="employee_name"
                             isImage={false}
                             isImageLink={false}
-                            data={data?.data?.data}
+                            data={data}
+                            tableHead={tableHead}
+                            fieldsToShow={fieldsToShow}
                         />
                     </StageLoading>
                 </div>

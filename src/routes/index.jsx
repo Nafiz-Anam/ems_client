@@ -3,7 +3,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 const App = lazy(() => import("../App"));
 const Home = lazy(() => import("../page/Home"));
-const Faq = lazy(() => import("../page/Setting/Faq"));
 const Login = lazy(() => import("../page/Auth/Login"));
 const Users = lazy(() => import("../page/Users/UserTable"));
 const PublicRoute = lazy(() => import("./PublicRoute"));
@@ -84,7 +83,6 @@ export const routes = createBrowserRouter([
                 path: "/setting/sent-notification",
                 element: <SentNotification />,
             },
-            { path: "/setting/faq", element: <Faq /> },
             { path: "/setting/terms-condition", element: <TermsCondition /> },
             { path: "/setting/privacy-policy", element: <PrivacyPolicy /> },
             { path: "/setting/refund-policy", element: <RefundPolicy /> },

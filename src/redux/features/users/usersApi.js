@@ -22,6 +22,25 @@ const usersApi = api.injectEndpoints({
                 }
             },
         }),
+        getPayouts: builder.mutation({
+            query: (data) => ({
+                url: "/payout/list",
+                method: "POST",
+                body: {
+                    perpage: 10,
+                    page: data.page,
+                    search: data?.search,
+                },
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setUsers(result.data.data));
+                } catch (error) {
+                    console.log("error for user api slice", error);
+                }
+            },
+        }),
         getBanks: builder.mutation({
             query: (data) => ({
                 url: "/employee/account_list",
@@ -85,5 +104,6 @@ export const {
     useUpdateStatusMutation,
     useGetUsersDetailsMutation,
     useGetBanksMutation,
-    useGetAccountDetailsMutation
+    useGetAccountDetailsMutation,
+    useGetPayoutsMutation
 } = usersApi;

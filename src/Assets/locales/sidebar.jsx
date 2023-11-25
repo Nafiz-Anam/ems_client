@@ -105,7 +105,6 @@ export const SidebarData = [
                         name: "Change Password",
                         url: "/setting/change-password",
                     },
-                    { id: 231223, name: "Faq", url: "/setting/faq" },
                     {
                         id: 231223,
                         name: "Privacy Policy",
