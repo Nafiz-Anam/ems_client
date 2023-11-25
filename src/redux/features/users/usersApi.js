@@ -75,7 +75,7 @@ const usersApi = api.injectEndpoints({
             query: (data) => ({
                 url: "/employee/block-unblock",
                 method: "POST",
-                body: { user_id: data.id, status: data.status },
+                body: { employee_id: data.id, status: data.status },
             }),
         }),
     }),

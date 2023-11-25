@@ -11,6 +11,7 @@ const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
+const ContactDetails = lazy(() => import("../page/Users/ContactDetails"));
 const PayoutTable = lazy(() => import("../page/Payouts/PayoutTable"));
 const PayoutDetails = lazy(() => import("../page/Payouts/PayoutDetails"));
 const VerifyAccount = lazy(() => import("../page/Auth/Verify"));
@@ -64,6 +65,10 @@ export const routes = createBrowserRouter([
             {
                 path: "/employees/account/details/:id",
                 element: <AccountDetails />,
+            },
+            {
+                path: "/employees/contact/details/:id",
+                element: <ContactDetails />,
             },
 
             // support chart routes

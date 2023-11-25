@@ -71,7 +71,7 @@ const UsersDetails = () => {
                 show: true,
                 title: details?.status === "active" ? "block" : "active",
                 width: "max-w-lg",
-                selectedItem: { ...item, name: item.full_name },
+                selectedItem: { ...item, name: item.name },
             })
         );
         setModalContent(<BlockModal name="user" reloadFn={loadDataFn} />);
@@ -129,7 +129,7 @@ const UsersDetails = () => {
                                     />
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 duration-300 md:gap-2 xl:gap-4 md:grid-cols-4">
+                            <div className="grid grid-cols-2 gap-4 duration-300 md:gap-2 xl:gap-4 md:grid-cols-5">
                                 <div className="">
                                     <p className="mb-1">Account Information</p>
                                     <div className="bg-[#63C054] bg-opacity-40  text-[#63C054] rounded-md cursor-pointer">
@@ -164,7 +164,7 @@ const UsersDetails = () => {
                                     <p className="mb-1">Contact Information</p>
                                     <div className="bg-[#3B76E1] bg-opacity-30  text-[#3B76E1] rounded-md">
                                         <Link
-                                            to={`/users/login-history/${encodeURIComponent(
+                                            to={`/employees/contact/details/${encodeURIComponent(
                                                 details?.id
                                             )}`}
                                             className="flex items-center justify-center gap-2 py-6 cursor-pointer"
@@ -174,6 +174,23 @@ const UsersDetails = () => {
                                                 colorCode={"#3B76E1"}
                                             />
                                             <p>Contact Information</p>
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div className="">
+                                    <p className="mb-1">Academic Information</p>
+                                    <div className="bg-[#e1b53b] bg-opacity-30  text-[#e19f3b] rounded-md">
+                                        <Link
+                                            to={`/employees/academic/details/${encodeURIComponent(
+                                                details?.id
+                                            )}`}
+                                            className="flex items-center justify-center gap-2 py-6 cursor-pointer"
+                                        >
+                                            <BookingIcon
+                                                className="w-10 h-10"
+                                                colorCode={"#e19f3b"}
+                                            />
+                                            <p>Academic Information</p>
                                         </Link>
                                     </div>
                                 </div>
