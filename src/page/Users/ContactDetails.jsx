@@ -1,11 +1,14 @@
-import Toast from "../../utils/toast";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Toast from "../../utils/toast";
 import Container from "../../components/share/ui/Container";
 import TableHeader from "../../components/share/ui/TableHeader";
 import { userLogout } from "../../redux/features/auth/authSlice";
-import { useGetUsersDetailsMutation } from "../../redux/features/users/usersApi";
-import { useParams } from "react-router-dom";
+import {
+    useGetUsersDetailsMutation,
+    useUpdateContactDetailsMutation,
+} from "../../redux/features/users/usersApi";
 
 const ContactDetails = () => {
     const { id } = useParams();
@@ -14,25 +17,55 @@ const ContactDetails = () => {
     const { details } = useSelector((state) => state.users);
     const [getUsersDetails, { isError, isLoading, error }] =
         useGetUsersDetailsMutation();
-    const loadDataFn = async () => {
-        await getUsersDetails(decodeURIComponent(id));
-    };
+
+    const [updateContactDetails] = useUpdateContactDetailsMutation();
+    const [contactDetails, setContactDetails] = useState({
+        contact_person1_name: "",
+        contact_person1_phone: "",
+        contact_person1_relation: "",
+        contact_person2_name: "",
+        contact_person2_phone: "",
+        contact_person2_relation: "",
+    });
+
     useEffect(() => {
-        loadDataFn();
+        if (id) {
+            getUsersDetails(decodeURIComponent(id));
+        }
     }, [id]);
 
     useEffect(() => {
+        if (details) {
+            setContactDetails({ ...details.contact_details });
+        }
+    }, [details]);
+
+    useEffect(() => {
         if (isError) {
-            error.data.error === "Token Expired Please Login."
-                ? (errorToast("Token Expired"), forceLogout())
-                : errorToast("internal server error");
+            errorToast(error?.data?.error || "Internal server error");
+            if (error?.data?.error === "Token Expired Please Login.") {
+                forceLogout();
+            }
         }
     }, [isError, error]);
+
+    const handleInputChange = (e) => {
+        setContactDetails({
+            ...contactDetails,
+            [e.target.name]: e.target.value,
+        });
+    };
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        await updateContactDetails({ employee_id: id, ...contactDetails });
+    };
 
     const forceLogout = () => {
         localStorage.removeItem("auth");
         dispatch(userLogout(undefined));
     };
+
     return (
         <div className="min-h-screen bg-white">
             <div className="flex items-center justify-between px-4 md:px-8">
@@ -61,9 +94,8 @@ const ContactDetails = () => {
                                 <div className="flex items-center gap-2"></div>
                             </div>
                             <form
-                                // onSubmit={handleForm}
-                                // ref={ref}
-                                className="grid grid-cols-6 gap-4 mt-6"
+                                onSubmit={handleFormSubmit}
+                                className="my-8 grid grid-cols-6 gap-4"
                             >
                                 <div className="col-span-6 md:col-span-3">
                                     <div className="">
@@ -72,9 +104,9 @@ const ContactDetails = () => {
                                         </p>
                                         <input
                                             value={
-                                                details?.contact_person1_name
+                                                contactDetails.contact_person1_name
                                             }
-                                            disabled
+                                            onChange={handleInputChange}
                                             required
                                             name="contact_person1_name"
                                             type="text"
@@ -90,10 +122,10 @@ const ContactDetails = () => {
                                         <input
                                             required
                                             name="contact_person1_phone"
-                                            disabled
                                             value={
-                                                details?.contact_person1_phone
+                                                contactDetails.contact_person1_phone
                                             }
+                                            onChange={handleInputChange}
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -106,10 +138,10 @@ const ContactDetails = () => {
                                         </p>
                                         <input
                                             required
-                                            disabled
                                             value={
-                                                details?.contact_person1_relation
+                                                contactDetails.contact_person1_relation
                                             }
+                                            onChange={handleInputChange}
                                             type="text"
                                             name="contact_person1_relation"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
@@ -125,11 +157,11 @@ const ContactDetails = () => {
                                         </p>
                                         <input
                                             value={
-                                                details?.contact_person2_name
+                                                contactDetails.contact_person2_name
                                             }
-                                            disabled
+                                            onChange={handleInputChange}
                                             required
-                                            name="contact_person1_name"
+                                            name="contact_person2_name"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -142,11 +174,11 @@ const ContactDetails = () => {
                                         </p>
                                         <input
                                             required
-                                            name="contact_person1_phone"
-                                            disabled
+                                            name="contact_person2_phone"
                                             value={
-                                                details?.contact_person2_phone
+                                                contactDetails.contact_person2_phone
                                             }
+                                            onChange={handleInputChange}
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -159,10 +191,10 @@ const ContactDetails = () => {
                                         </p>
                                         <input
                                             required
-                                            disabled
                                             value={
-                                                details?.contact_person2_relation
+                                                contactDetails.contact_person2_relation
                                             }
+                                            onChange={handleInputChange}
                                             type="text"
                                             name="contact_person2_relation"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
@@ -171,8 +203,11 @@ const ContactDetails = () => {
                                 </div>
                                 <div className="col-span-6 md:col-span-3"></div>
 
-                                <button className="col-span-6 py-3 mt-8 rounded-md bg-primary text-secondary">
-                                    Submit
+                                <button
+                                    type="submit"
+                                    className="col-span-6 py-3 mt-8 rounded-md bg-primary text-secondary"
+                                >
+                                    Update
                                 </button>
                             </form>
                         </section>

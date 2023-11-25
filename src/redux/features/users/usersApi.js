@@ -97,6 +97,20 @@ const usersApi = api.injectEndpoints({
                 body: { employee_id: data.id, status: data.status },
             }),
         }),
+        updateContactDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/update/contact_info",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        updateAccountDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/update/banks-details",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 export const {
@@ -105,5 +119,7 @@ export const {
     useGetUsersDetailsMutation,
     useGetBanksMutation,
     useGetAccountDetailsMutation,
-    useGetPayoutsMutation
+    useGetPayoutsMutation,
+    useUpdateContactDetailsMutation,
+    useUpdateAccountDetailsMutation,
 } = usersApi;
