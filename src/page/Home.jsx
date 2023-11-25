@@ -4,54 +4,47 @@ import Cards from "../components/dashboard/Cards";
 import Container from "../components/share/ui/Container";
 import { Options } from "../components/share/ui/Dropdown";
 import TableHeader from "../components/share/ui/TableHeader";
-import {
-    ActiveUser,
-    BagIcon,
-    ExpertUserIcon,
-    GroupUserIcon,
-    LoadingIcon,
-    WalletIcon,
-} from "../Assets/icons";
+import { BagIcon, LoadingIcon, WalletIcon } from "../Assets/icons";
 
 const Home = () => {
     const cardData = {
         HeaderData: [
             {
                 name: "Today Earning",
-                value: "100,000",
+                value: "$100,000",
                 url: "some url",
                 bg: "bg-[#0eab8b] bg-opacity-20",
                 icon: <WalletIcon />,
             },
             {
                 name: "Net Revenue",
-                value: "100,000",
+                value: "$100,000",
                 url: "some url",
                 icon: <WalletIcon />,
             },
         ],
         EarningData: [
             {
-                name: "Total Users",
+                name: "Total Employees",
                 value: 15,
                 bg: "bg-[#AA72EB]",
                 icon: <BagIcon />,
             },
             {
-                name: "Total Active Users",
+                name: "Total Active Employees",
                 value: 13,
                 bg: "bg-[#1DCBA8]",
                 icon: <BagIcon />,
             },
             {
-                name: "New User",
+                name: "New Employees",
                 value: 13,
                 url: "add later ",
                 bg: "bg-[#FFAF3D]",
                 icon: <LoadingIcon />,
             },
             {
-                name: "Total Product",
+                name: "Total Tasks",
                 value: 13,
                 bg: "bg-[#FF6A6A]",
                 icon: <BagIcon />,
@@ -59,50 +52,26 @@ const Home = () => {
         ],
         UserData: [
             {
-                name: "Total User",
-                value: "24,000",
-                url: "some url",
-                icon: <GroupUserIcon />,
-            },
-            {
-                name: "Total Active User",
-                value: "2,000",
-                url: "some url",
-                icon: <ActiveUser />,
-            },
-            {
-                name: "Total Experts",
-                value: "3,000",
-                url: "some url",
-                icon: <ExpertUserIcon />,
-            },
-            {
-                name: "Total Active Experts",
-                value: "889",
-                url: "some url",
-                icon: <ExpertUserIcon />,
-            },
-            {
-                name: "Total Job Post",
-                value: "2,580",
+                name: "Total Tasks Post",
+                value: "580",
                 url: "some url",
                 icon: <BagIcon />,
             },
             {
-                name: "Complete Job Post",
-                value: "2,450",
+                name: "Complete Tasks",
+                value: "450",
                 url: "some url",
                 icon: <BagIcon />,
             },
             {
                 name: "Complete Payment",
-                value: "2,320",
+                value: "$2,320",
                 url: "some url",
                 icon: <WalletIcon />,
             },
             {
                 name: "Pending Payment",
-                value: "412",
+                value: "$412",
                 url: "some url",
                 icon: <WalletIcon />,
             },
