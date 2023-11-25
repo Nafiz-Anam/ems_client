@@ -56,6 +56,21 @@ const usersApi = api.injectEndpoints({
                 }
             },
         }),
+        getAccountDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/banks-details",
+                method: "POST",
+                body: { account_id: data },
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setUsersDetails(result.data.data));
+                } catch (error) {
+                    console.log("error for userApi.js", error);
+                }
+            },
+        }),
         updateStatus: builder.mutation({
             query: (data) => ({
                 url: "/employee/block-unblock",
@@ -70,4 +85,5 @@ export const {
     useUpdateStatusMutation,
     useGetUsersDetailsMutation,
     useGetBanksMutation,
+    useGetAccountDetailsMutation
 } = usersApi;

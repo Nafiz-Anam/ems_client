@@ -4,15 +4,12 @@ import Container from "../../components/share/ui/Container";
 import TableHeader from "../../components/share/ui/TableHeader";
 import { useGetBanksMutation } from "../../redux/features/users/usersApi";
 import { useParams } from "react-router-dom";
-import { SkeletonLoader } from "../../components/share/loading/SkeletonLoader";
 import StageLoading from "../../components/share/loading/StageLoading";
 
 const BankAccounts = () => {
     const [data, setData] = useState([]);
     const { id } = useParams();
-
     const deId = decodeURIComponent(id);
-
     const tableHeader = [
         { name: "Employee Name", field: "employee_name" },
         { name: "Bank Name", field: "bank_name" },

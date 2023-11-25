@@ -10,6 +10,7 @@ const PublicRoute = lazy(() => import("./PublicRoute"));
 const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
+const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
 const PayoutTable = lazy(() => import("../page/Payouts/PayoutTable"));
 const PayoutDetails = lazy(() => import("../page/Payouts/PayoutDetails"));
 const VerifyAccount = lazy(() => import("../page/Auth/Verify"));
@@ -18,7 +19,6 @@ const PageNotFound = lazy(() => import("../page/PageNotFound"));
 const Registration = lazy(() => import("../page/Auth/Registration"));
 const UsersDetails = lazy(() => import("../page/Users/UserDetails"));
 const BankAccounts = lazy(() => import("../page/Users/BankAccounts"));
-const UserBookings = lazy(() => import("../page/Users/UserBookings"));
 const RefundPolicy = lazy(() => import("../page/Setting/RefundPolicy"));
 const SupportChart = lazy(() => import("../page/Support/SupportChart"));
 const RecoverAccount = lazy(() => import("../page/Auth/RecoverAccount"));
@@ -62,8 +62,8 @@ export const routes = createBrowserRouter([
             { path: "/employees/bank_accounts", element: <BankAccounts /> },
             { path: "/employees/details/:id", element: <UsersDetails /> },
             {
-                path: "/all-users/details/users-all-booking/:userId/booking-details/:detailsId",
-                element: <UserBookings />,
+                path: "/employees/account/details/:id",
+                element: <AccountDetails />,
             },
 
             // support chart routes

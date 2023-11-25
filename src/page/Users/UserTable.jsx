@@ -39,8 +39,8 @@ const UserTable = () => {
     };
 
     const tableHead = [
-        { name: "Image", field: "id_img1" },
-        { name: "Username", field: "name" },
+        { name: "Image", field: "profile_img" },
+        { name: "Employee Name", field: "name" },
         { name: "Phone ", field: "phone" },
         { name: "Email", field: "email" },
         { name: "Gender ", field: "gender" },
@@ -48,7 +48,7 @@ const UserTable = () => {
         { name: "status", field: "status" },
     ];
     const fieldsToShow = [
-        "id_img1",
+        "profile_img",
         "name",
         "phone",
         "email",
@@ -87,7 +87,7 @@ const UserTable = () => {
                             btn={false}
                             linkUrl="/employees/details"
                             customID={true}
-                            assignLinkOnHeader="id_img1"
+                            assignLinkOnHeader="profile_img"
                             linkOnly={true}
                             linkFieldName="name"
                             isImage={true}

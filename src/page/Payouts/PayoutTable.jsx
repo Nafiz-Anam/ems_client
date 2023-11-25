@@ -22,7 +22,6 @@ const PayoutTable = () => {
             setRightPage(1);
         }
         const data = await getUsers({
-            type: "client",
             page,
             search: search?.client,
         });
@@ -40,31 +39,27 @@ const PayoutTable = () => {
     };
 
     const tableHead = [
-        { name: "Image", field: "id_img1" },
-        { name: "Username", field: "full_name" },
-        { name: "Email - Phone ", field: "mobile_no" },
-        { name: "Gender ", field: "gender" },
+        { name: "Username", field: "employee_name" },
         { name: "Account balance", field: "account_balance" },
-        { name: "Join", field: "created_at" },
-        { name: "status", field: "status" },
+        { name: "Payout Month", field: "month" },
+        { name: "Amount", field: "amount" },
+        { name: "Cleared At", field: "created_at" },
     ];
     const fieldsToShow = [
-        "id_img1",
-        "full_name",
-        "mobile_no",
-        "gender",
+        "employee_name",
         "account_balance",
+        "month",
+        "amount",
         "created_at",
-        "status",
     ];
 
     return (
         <div className="bg-secondary">
-            <TableHeader title={"All Users"} />
+            <TableHeader title={"All Payouts"} />
             <Container>
                 <div className="md:flex mb-[37px] mt-[30px] items-center justify-between">
                     <div className="mb-4 md:mb-0">
-                        <p className="mb-2 text-xl font-bold">All Users</p>
+                        <p className="mb-2 text-xl font-bold">All Payouts</p>
                     </div>
                     <div className="flex flex-row items-end w-full md:max-w-md md:flex-col ">
                         <div className="flex flex-col items-center w-full max-w-sm gap-2 md:flex-row ">
@@ -86,16 +81,14 @@ const PayoutTable = () => {
                         <TableTemp
                             rightPage={rightPage}
                             btn={false}
-                            linkUrl="/all-users/details"
+                            customIdFieldName="employee_id"
+                            linkUrl="/employees/details"
                             customID={true}
-                            assignLinkOnHeader="id_img1"
                             linkOnly={true}
-                            linkFieldName="full_name"
-                            isImage={true}
+                            linkFieldName="employee_name"
+                            isImage={false}
                             isImageLink={false}
-                            tableHead={tableHead}
-                            data={data}
-                            fieldsToShow={fieldsToShow}
+                            data={data?.data?.data}
                         />
                     </StageLoading>
                 </div>
