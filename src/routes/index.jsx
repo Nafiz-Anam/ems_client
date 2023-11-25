@@ -11,6 +11,8 @@ const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
 const ContactDetails = lazy(() => import("../page/Users/ContactDetails"));
+const AcademicDetails = lazy(() => import("../page/Users/AcademicDetails"));
+const KycDetails = lazy(() => import("../page/Users/KycDetails"));
 const PayoutTable = lazy(() => import("../page/Payouts/PayoutTable"));
 const PayoutDetails = lazy(() => import("../page/Payouts/PayoutDetails"));
 const VerifyAccount = lazy(() => import("../page/Auth/Verify"));
@@ -68,6 +70,14 @@ export const routes = createBrowserRouter([
             {
                 path: "/employees/contact/details/:id",
                 element: <ContactDetails />,
+            },
+            {
+                path: "/employees/academic/details/:id",
+                element: <AcademicDetails />,
+            },
+            {
+                path: "/employees/kyc/details/:id",
+                element: <KycDetails />,
             },
 
             // support chart routes

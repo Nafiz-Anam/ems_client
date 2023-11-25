@@ -97,6 +97,13 @@ const usersApi = api.injectEndpoints({
                 body: { employee_id: data.id, status: data.status },
             }),
         }),
+        updateUserDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/update",
+                method: "POST",
+                body: data,
+            }),
+        }),
         updateContactDetails: builder.mutation({
             query: (data) => ({
                 url: "/employee/update/contact_info",
@@ -107,6 +114,20 @@ const usersApi = api.injectEndpoints({
         updateAccountDetails: builder.mutation({
             query: (data) => ({
                 url: "/employee/update/banks-details",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        updateAcademicDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/update/academic-info",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        updateKycDetails: builder.mutation({
+            query: (data) => ({
+                url: "/employee/update/kyc",
                 method: "POST",
                 body: data,
             }),
@@ -122,4 +143,7 @@ export const {
     useGetPayoutsMutation,
     useUpdateContactDetailsMutation,
     useUpdateAccountDetailsMutation,
+    useUpdateUserDetailsMutation,
+    useUpdateAcademicDetailsMutation,
+    useUpdateKycDetailsMutation,
 } = usersApi;

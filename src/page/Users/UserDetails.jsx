@@ -1,17 +1,19 @@
-import Toast from "../../utils/toast";
-import { CgUnblock } from "react-icons/cg";
-import Modal from "../../components/Modals/Modal";
 import React, { useEffect, useState } from "react";
-import Card from "../../components/dashboard/Card";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, Link } from "react-router-dom";
+import Toast from "../../utils/toast";
 import Container from "../../components/share/ui/Container";
 import TableHeader from "../../components/share/ui/TableHeader";
+import Card from "../../components/dashboard/Card";
+import Modal from "../../components/Modals/Modal";
+import BlockModal from "../../components/Modals/modalComponents/BlockModal";
 import { userLogout } from "../../redux/features/auth/authSlice";
 import { showModal } from "../../redux/features/modals/modalSlices";
-import BlockModal from "../../components/Modals/modalComponents/BlockModal";
-import { useGetUsersDetailsMutation } from "../../redux/features/users/usersApi";
-import PhoneNumberValidation from "../../components/PhoneNumberValidation/PhoneNumberValidation";
-import { Link, useParams } from "react-router-dom";
+import { CgUnblock } from "react-icons/cg";
+import {
+    useGetUsersDetailsMutation,
+    useUpdateUserDetailsMutation,
+} from "../../redux/features/users/usersApi";
 import {
     BlockIcon,
     BookingIcon,
@@ -26,22 +28,47 @@ const UsersDetails = () => {
     const { errorToast } = Toast();
     const [modalContent, setModalContent] = useState();
     const { details } = useSelector((state) => state.users);
-    const [phoneNumber, setPhoneNumber] = useState(details?.mobile_no || "");
     const [getUsersDetails, { isError, isLoading, error }] =
         useGetUsersDetailsMutation();
+    const [updateUserDetails] = useUpdateUserDetailsMutation();
+    const [userData, setUserData] = useState({ ...details, profile_img: null });
+
+    useEffect(() => {
+        getUsersDetails(decodeURIComponent(id));
+    }, [id, getUsersDetails]);
+
+    useEffect(() => {
+        setUserData({ ...details });
+    }, [details]);
+
+    const handleInputChange = (e) => {
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        await updateUserDetails({ employee_id: id, ...userData });
+    };
+
+    useEffect(() => {
+        if (isError) {
+            errorToast(error?.data?.error || "Internal server error");
+            if (error?.data?.error === "Token Expired Please Login.") {
+                forceLogout();
+            }
+        }
+    }, [isError, error]);
+
     const loadDataFn = async () => {
         await getUsersDetails(decodeURIComponent(id));
     };
     useEffect(() => {
         loadDataFn();
     }, [id]);
-    useEffect(() => {
-        setPhoneNumber(details?.mobile_no || "");
-    }, [details]);
     const data = [
         {
             name: "Main  Salary",
-            value: "$2,580",
+            value: `$${userData.salary}`,
             url: "some url",
             icon: <MainBalanceIcon />,
         },
@@ -121,17 +148,18 @@ const UsersDetails = () => {
                                         ))}
                                     </div>
                                 </div>
-                                <div className="col-span-1 bg-white md:col-span-4">
+                                <div className="col-span-1 bg-white flex m-auto md:col-span-4">
                                     <img
                                         src={details?.profile_img}
-                                        className="w-full h-full max-h-[330px] rounded-md"
+                                        className="w-[200px] h-[200px] max-h-[300px] rounded-md"
                                         alt=""
                                     />
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 gap-4 duration-300 md:gap-2 xl:gap-4 md:grid-cols-5">
+
+                            <div className="pt-5 grid grid-cols-2 gap-4 duration-300 md:gap-2 xl:gap-4 md:grid-cols-5">
                                 <div className="">
-                                    <p className="mb-1">Account Information</p>
+                                    <p className="mb-1">Bank Information</p>
                                     <div className="bg-[#63C054] bg-opacity-40  text-[#63C054] rounded-md cursor-pointer">
                                         <Link
                                             to={`/employees/account/details/${encodeURIComponent(
@@ -144,20 +172,25 @@ const UsersDetails = () => {
                                                 className="w-10 h-10"
                                                 colorCode={"#63C054"}
                                             />
-                                            <p>Account Information</p>
+                                            <p>Bank Account Information</p>
                                         </Link>
                                     </div>
                                 </div>
                                 <div className="">
                                     <p className="mb-1">KYC Information</p>
                                     <div className="text-red-500 bg-red-500 rounded-md bg-opacity-40">
-                                        <div className="flex items-center justify-center gap-2 py-6 cursor-pointer">
+                                        <Link
+                                            to={`/employees/kyc/details/${encodeURIComponent(
+                                                details?.id
+                                            )}`}
+                                            className="flex items-center justify-center gap-2 py-6"
+                                        >
                                             <BookingIcon
                                                 className="w-10 h-10"
                                                 colorCode={"#F76868"}
                                             />
                                             <p>KYC Information</p>
-                                        </div>
+                                        </Link>
                                     </div>
                                 </div>
                                 <div className="">
@@ -243,18 +276,17 @@ const UsersDetails = () => {
                                 <div className="flex items-center gap-2"></div>
                             </div>
                             <form
-                                // onSubmit={handleForm}
-                                // ref={ref}
+                                onSubmit={handleSubmit}
                                 className="grid grid-cols-6 gap-4 mt-6"
                             >
                                 <div className="col-span-6 md:col-span-3">
                                     <div className="">
-                                        <p className="mb-1">Full Name</p>
+                                        <p className="mb-1">Name</p>
                                         <input
-                                            value={details?.name}
-                                            disabled
+                                            value={userData.name || ""}
+                                            onChange={handleInputChange}
                                             required
-                                            name="first_name"
+                                            name="name"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -266,8 +298,8 @@ const UsersDetails = () => {
                                         <input
                                             required
                                             name="email"
-                                            disabled
-                                            value={details?.email}
+                                            value={userData.email || ""}
+                                            onChange={handleInputChange}
                                             type="email"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -276,12 +308,14 @@ const UsersDetails = () => {
                                 <div className="col-span-6 md:col-span-3">
                                     <div className="relative">
                                         <p className="mb-1">Phone Number</p>
-                                        <div className="relative flex w-full rounded-md">
-                                            <PhoneNumberValidation
-                                                phoneNumber={phoneNumber}
-                                                setPhoneNumber={setPhoneNumber}
-                                            />
-                                        </div>
+                                        <input
+                                            required
+                                            name="phone"
+                                            value={userData.phone || ""}
+                                            onChange={handleInputChange}
+                                            type="text"
+                                            className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                        />
                                     </div>
                                 </div>
                                 <div className="col-span-6 md:col-span-3">
@@ -289,25 +323,22 @@ const UsersDetails = () => {
                                         <p className="mb-1">Date of birth</p>
                                         <input
                                             required
-                                            disabled
-                                            value={details?.birth_date}
+                                            value={userData.birth_date || ""}
+                                            onChange={handleInputChange}
                                             type="date"
-                                            name="date_of_birth"
+                                            name="birth_date"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
                                     </div>
                                 </div>
-
-                                {/* one input */}
-
                                 <div className="col-span-6 md:col-span-3">
                                     <div className="">
                                         <p className="mb-1">City</p>
                                         <input
                                             required
-                                            disabled
-                                            value={details.city}
-                                            name="address"
+                                            value={userData.city || ""}
+                                            onChange={handleInputChange}
+                                            name="city"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -318,9 +349,9 @@ const UsersDetails = () => {
                                         <p className="mb-1">Zip Code</p>
                                         <input
                                             required
-                                            disabled
-                                            value={details.zip_code}
-                                            name="address"
+                                            value={userData.zip_code || ""}
+                                            onChange={handleInputChange}
+                                            name="zip_code"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -331,9 +362,9 @@ const UsersDetails = () => {
                                         <p className="mb-1">State</p>
                                         <input
                                             required
-                                            disabled
-                                            value={details.state}
-                                            name="address"
+                                            value={userData.state || ""}
+                                            onChange={handleInputChange}
+                                            name="state"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -344,9 +375,9 @@ const UsersDetails = () => {
                                         <p className="mb-1">Country</p>
                                         <input
                                             required
-                                            disabled
-                                            value={details.country}
-                                            name="address"
+                                            value={userData.country || ""}
+                                            onChange={handleInputChange}
+                                            name="country"
                                             type="text"
                                             className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                         />
@@ -357,8 +388,8 @@ const UsersDetails = () => {
                                         <p className="mb-1">Address</p>
                                         <textarea
                                             required
-                                            disabled
-                                            value={details.address}
+                                            value={userData.address || ""}
+                                            onChange={handleInputChange}
                                             name="address"
                                             type="text"
                                             className="flex justify-start w-full h-24 p-4 border rounded-md focus:outline-none"
@@ -366,8 +397,11 @@ const UsersDetails = () => {
                                     </div>
                                 </div>
 
-                                <button className="col-span-6 py-3 mt-8 rounded-md bg-primary text-secondary">
-                                    Submit
+                                <button
+                                    type="submit"
+                                    className="col-span-6 py-3 mt-8 rounded-md bg-primary text-secondary"
+                                >
+                                    Update Details
                                 </button>
                             </form>
                         </section>
