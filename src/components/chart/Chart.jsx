@@ -1,7 +1,7 @@
 import React from "react";
 import OneLineGraph from "./OnelineGraph";
 
-const Chart = () => {
+const Chart = (data) => {
     return (
         <div className="gap-4 pt-4 pb-10 lg:flex ">
             <div className="bg-white shadow-cardShadow rounded-[16px] pb-[10px] pt-5 lg:w-[100%] ">
@@ -13,7 +13,7 @@ const Chart = () => {
                         <p className="text-2xl font-bold"> $ 5,85,000</p>
                     </div>
                 </div>
-                <OneLineGraph />
+                <OneLineGraph data={data} />
             </div>
         </div>
     );

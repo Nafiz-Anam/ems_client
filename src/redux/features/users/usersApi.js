@@ -6,6 +6,7 @@ import {
     setBanks,
     setUsersDetails,
     setAccountDetails,
+    setAnalytics,
 } from "./usersSlice";
 
 const usersApi = api.injectEndpoints({
@@ -92,6 +93,21 @@ const usersApi = api.injectEndpoints({
                 try {
                     const result = await queryFulfilled;
                     dispatch(setUsersDetails(result.data.data));
+                } catch (error) {
+                    console.log("error for userApi.js", error);
+                }
+            },
+        }),
+        getAnalytics: builder.mutation({
+            query: (data) => ({
+                url: "/dashboard/analytics",
+                method: "POST",
+                body: {},
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setAnalytics(result.data.data));
                 } catch (error) {
                     console.log("error for userApi.js", error);
                 }
@@ -193,4 +209,5 @@ export const {
     useCreateBankMutation,
     useGetUsersDropdownMutation,
     useCreateSalaryPayoutMutation,
+    useGetAnalyticsMutation
 } = usersApi;

@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Chart from "../components/chart/Chart";
 import Cards from "../components/dashboard/Cards";
 import Container from "../components/share/ui/Container";
 import { Options } from "../components/share/ui/Dropdown";
 import TableHeader from "../components/share/ui/TableHeader";
 import { BagIcon, LoadingIcon, WalletIcon } from "../Assets/icons";
+import { useSelector } from "react-redux";
+import { useGetAnalyticsMutation } from "../redux/features/users/usersApi";
 
 const Home = () => {
+    const [graphData, setGraphData] = useState([]);
+
+    const { data } = useSelector((state) => state.users);
+    const [getAnalytics, { isError, isLoading, isSuccess, error }] =
+        useGetAnalyticsMutation();
+
+    const loadDataFn = async () => {
+        const data = await getAnalytics();
+        setGraphData(data?.data?.analytics);
+    };
+
+    useEffect(() => {
+        loadDataFn();
+    }, []);
+
     const cardData = {
         HeaderData: [
             {
@@ -79,31 +96,39 @@ const Home = () => {
     };
 
     return (
-        <div className="bg-white">
-            <div className="flex items-center justify-between px-4 md:px-8">
-                <div className="-ml-4 md:-ml-8">
-                    <TableHeader title={"Dashboard"} />
+        <>
+            {isLoading ? (
+                <div className="flex flex-col mt-10">
+                    <span className="loading loading-bars loading-md"></span>
                 </div>
-                <div className="">
-                    <Options
-                        options={[
-                            "Daily",
-                            "Weekly",
-                            "Monthly",
-                            "Yearly",
-                            "Life Time",
-                        ]}
-                    />
+            ) : (
+                <div className="bg-white">
+                    <div className="flex items-center justify-between px-4 md:px-8">
+                        <div className="-ml-4 md:-ml-8">
+                            <TableHeader title={"Dashboard"} />
+                        </div>
+                        <div className="">
+                            <Options
+                                options={[
+                                    "Daily",
+                                    "Weekly",
+                                    "Monthly",
+                                    "Yearly",
+                                    "Life Time",
+                                ]}
+                            />
+                        </div>
+                    </div>
+                    <Container>
+                        <p className="mb-5 text-xl font-bold capitalize">
+                            You are viewing life time Data
+                        </p>
+                        <Cards data={cardData} />
+                        <Chart data={graphData} />
+                    </Container>
                 </div>
-            </div>
-            <Container>
-                <p className="mb-5 text-xl font-bold capitalize">
-                    You are viewing life time Data
-                </p>
-                <Cards data={cardData} />
-                <Chart />
-            </Container>
-        </div>
+            )}
+        </>
     );
 };
 

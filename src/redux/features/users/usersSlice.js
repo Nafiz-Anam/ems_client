@@ -14,6 +14,9 @@ const usersSlices = createSlice({
         setUserDrop: (state, action) => {
             state.data = action.payload;
         },
+        setAnalytics: (state, action) => {
+            state.data = action.payload;
+        },
         setPayouts: (state, action) => {
             state.data = action.payload;
         },
@@ -36,5 +39,6 @@ export const {
     setBanks,
     setUsersDetails,
     setAccountDetails,
+    setAnalytics,
 } = usersSlices.actions;
 export default usersSlices.reducer;

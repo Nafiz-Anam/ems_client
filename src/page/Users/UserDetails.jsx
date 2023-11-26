@@ -74,19 +74,19 @@ const UsersDetails = () => {
         },
         {
             name: "Total Paid-off",
-            value: "$2,580",
+            value: `$${userData.total_amount_earned}`,
             url: "some url",
             icon: <DepositIcon />,
         },
         {
             name: "Current Month Payment",
-            value: "$2,580",
+            value: `$${userData.current_month_payment}`,
             url: "some url",
             icon: <TotalBooking />,
         },
         {
             name: "Working Month",
-            value: "8",
+            value: `${userData.working_months}`,
             url: "some url",
             icon: <TotalBooking />,
         },

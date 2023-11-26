@@ -41,7 +41,7 @@ const PayoutTable = () => {
     const tableHead = [
         { name: "Employee Name", field: "employee_name" },
         { name: "Payout Month", field: "month" },
-        { name: "Amount", field: "amount" },
+        { name: "Amount($)", field: "amount" },
         { name: "Paid At", field: "created_at" },
     ];
     const fieldsToShow = ["employee_name", "month", "amount", "created_at"];
