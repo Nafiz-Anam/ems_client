@@ -14,7 +14,10 @@ const CreateEmployee = () => {
     const { errorToast } = Toast();
     const [createEmployee, { isError, isLoading, error }] =
         useCreateEmployeeMutation();
-
+    const [image, setImage] = useState(null);
+    const [image2, setImage2] = useState(null);
+    const [image3, setImage3] = useState(null);
+    const [image4, setImage4] = useState(null);
     const [userData, setUserData] = useState({
         name: "",
         email: "",
@@ -45,11 +48,6 @@ const CreateEmployee = () => {
     const handleInputChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     };
-
-    const [image, setImage] = useState(null);
-    const [image2, setImage2] = useState(null);
-    const [image3, setImage3] = useState(null);
-    const [image4, setImage4] = useState(null);
 
     const handleImageChange1 = (newImage) => {
         setImage(newImage);
@@ -111,7 +109,7 @@ const CreateEmployee = () => {
         <div className="min-h-screen bg-white">
             <div className="flex items-center justify-between px-4 md:px-8">
                 <div className="-ml-4 md:-ml-8">
-                    <TableHeader title={"Employee Details"} />
+                    <TableHeader title={"Create Employee"} />
                 </div>
             </div>
             <Container>
@@ -129,21 +127,6 @@ const CreateEmployee = () => {
                         {/* User Information input */}
                         <section className="my-8">
                             <form onSubmit={handleSubmit}>
-                                <section>
-                                    <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-                                        <div className="col-span-1 md:col-span-8">
-                                            <p className="mb-1">
-                                                Profile Image
-                                            </p>
-                                            <ImageUploader
-                                                onImageChange={
-                                                    handleImageChange1
-                                                }
-                                            />
-                                        </div>
-                                        <div className="col-span-1 bg-white flex m-auto md:col-span-4"></div>
-                                    </div>
-                                </section>
                                 <div className="flex justify-between item-center  mt-5">
                                     <p className="text-xl font-bold capitalize">
                                         Personal Information
@@ -151,6 +134,13 @@ const CreateEmployee = () => {
                                     <div className="flex items-center gap-2"></div>
                                 </div>
                                 <section className="grid grid-cols-6 gap-4 mt-6">
+                                    <div className="col-span-6 md:col-span-3">
+                                        <p className="mb-1">Profile Image</p>
+                                        <ImageUploader
+                                            onImageChange={handleImageChange1}
+                                        />
+                                    </div>
+                                    <div className="col-span-6 md:col-span-3"></div>
                                     <div className="col-span-6 md:col-span-3">
                                         <div className="">
                                             <p className="mb-1">Name</p>
@@ -205,6 +195,19 @@ const CreateEmployee = () => {
                                                 onChange={handleInputChange}
                                                 type="date"
                                                 name="birth_date"
+                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-span-6 md:col-span-3">
+                                        <div className="">
+                                            <p className="mb-1">Gender</p>
+                                            <input
+                                                required
+                                                value={userData.gender || ""}
+                                                onChange={handleInputChange}
+                                                name="gender"
+                                                type="text"
                                                 className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                             />
                                         </div>
@@ -274,6 +277,32 @@ const CreateEmployee = () => {
                                             />
                                         </div>
                                     </div>
+                                    <div className="col-span-6 md:col-span-3">
+                                        <div className="">
+                                            <p className="mb-1">Salary</p>
+                                            <input
+                                                required
+                                                value={userData.salary || ""}
+                                                onChange={handleInputChange}
+                                                name="salary"
+                                                type="text"
+                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-span-6 md:col-span-3">
+                                        <div className="">
+                                            <p className="mb-1">Role</p>
+                                            <input
+                                                required
+                                                value={userData.role || ""}
+                                                onChange={handleInputChange}
+                                                name="role"
+                                                type="text"
+                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
                                 </section>
 
                                 <div className="flex justify-between item-center mt-5">
@@ -282,7 +311,7 @@ const CreateEmployee = () => {
                                     </p>
                                     <div className="flex items-center gap-2"></div>
                                 </div>
-                                <section className="grid grid-cols-6 gap-4 mt-6">
+                                <section className="grid grid-cols-1 gap-4 mt-6 md:grid-cols-12">
                                     <div className="col-span-12 md:col-span-12">
                                         <div className="">
                                             <p className="mb-1">ID Type</p>
@@ -296,7 +325,7 @@ const CreateEmployee = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-span-12 md:col-span-12">
+                                    <div className="col-span-12 md:col-span-6">
                                         <div className="">
                                             <p className="mb-1">
                                                 ID front image
@@ -308,7 +337,7 @@ const CreateEmployee = () => {
                                             />
                                         </div>
                                     </div>
-                                    <div className="col-span-12 md:col-span-12">
+                                    <div className="col-span-12 md:col-span-6">
                                         <div className="">
                                             <p className="mb-1">
                                                 ID Back Image
@@ -552,7 +581,7 @@ const CreateEmployee = () => {
 
                                 <button
                                     type="submit"
-                                    className="col-span-6 py-3 mt-8 rounded-md bg-primary text-secondary"
+                                    className="py-3 px-5 mt-8 rounded-md bg-primary text-secondary"
                                 >
                                     Create Employee
                                 </button>
