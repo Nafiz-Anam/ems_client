@@ -24,7 +24,6 @@ const Registration = lazy(() => import("../page/Auth/Registration"));
 const UsersDetails = lazy(() => import("../page/Users/UserDetails"));
 const BankAccounts = lazy(() => import("../page/Users/BankAccounts"));
 const RefundPolicy = lazy(() => import("../page/Setting/RefundPolicy"));
-const SupportChart = lazy(() => import("../page/Support/SupportChart"));
 const RecoverAccount = lazy(() => import("../page/Auth/RecoverAccount"));
 const RecoverPassword = lazy(() => import("../page/Auth/ChangePassword"));
 const AddPassword = lazy(() => import("../page/Auth/AddPassword"));
@@ -79,9 +78,6 @@ export const routes = createBrowserRouter([
                 path: "/employees/kyc/details/:id",
                 element: <KycDetails />,
             },
-
-            // support chart routes
-            { path: "/support-chart", element: <SupportChart /> },
 
             // setting routes
             { path: "/setting/change-password", element: <ChangePassword /> },
