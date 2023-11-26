@@ -10,7 +10,6 @@ import { useGetAnalyticsMutation } from "../redux/features/users/usersApi";
 
 const Home = () => {
     const [graphData, setGraphData] = useState([]);
-
     const { data } = useSelector((state) => state.users);
     const [getAnalytics, { isError, isLoading, isSuccess, error }] =
         useGetAnalyticsMutation();
@@ -43,26 +42,26 @@ const Home = () => {
         EarningData: [
             {
                 name: "Total Employees",
-                value: 15,
+                value: `${graphData.totalEmployeeCount}`,
                 bg: "bg-[#AA72EB]",
                 icon: <BagIcon />,
             },
             {
                 name: "Total Active Employees",
-                value: 13,
+                value: `${graphData.activeEmployeeCount}`,
                 bg: "bg-[#1DCBA8]",
                 icon: <BagIcon />,
             },
             {
                 name: "New Employees",
-                value: 13,
+                value: 17,
                 url: "add later ",
                 bg: "bg-[#FFAF3D]",
                 icon: <LoadingIcon />,
             },
             {
                 name: "Total Tasks",
-                value: 13,
+                value: "2,99",
                 bg: "bg-[#FF6A6A]",
                 icon: <BagIcon />,
             },
