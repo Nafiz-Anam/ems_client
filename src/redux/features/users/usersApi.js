@@ -18,6 +18,7 @@ const usersApi = api.injectEndpoints({
                 body: {
                     perpage: 10,
                     page: data.page,
+                    deleted: 0,
                     search: data?.search,
                 },
             }),
@@ -209,5 +210,5 @@ export const {
     useCreateBankMutation,
     useGetUsersDropdownMutation,
     useCreateSalaryPayoutMutation,
-    useGetAnalyticsMutation
+    useGetAnalyticsMutation,
 } = usersApi;

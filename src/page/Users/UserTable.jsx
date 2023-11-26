@@ -7,8 +7,10 @@ import TableHeader from "../../components/share/ui/TableHeader";
 import Paginate from "../../components/share/Paginate/Paginate";
 import StageLoading from "../../components/share/loading/StageLoading";
 import { useGetUsersMutation } from "../../redux/features/users/usersApi";
+import { useNavigate } from "react-router-dom";
 
 const UserTable = () => {
+    const navigate = useNavigate();
     const [search, setSearch] = useState();
     const [rightPage, setRightPage] = useState(1);
     const [paginateData, setPaginateData] = useState([]);
@@ -23,6 +25,7 @@ const UserTable = () => {
         }
         const data = await getUsers({
             page,
+            deleted: 0,
             search: search?.client,
         });
         setPaginateData(data);
@@ -57,6 +60,8 @@ const UserTable = () => {
         "status",
     ];
 
+    const token = localStorage.getItem("auth");
+
     const reportFn = (data) => {
         fetch(`http://localhost:5000/api/v1/dashboard/generate-report`, {
             method: "POST",
@@ -78,7 +83,21 @@ const UserTable = () => {
             .catch((error) => console.error("Error:", error));
     };
 
-    const deleteFn = (item) => {};
+    const deleteFn = (data) => {
+        fetch(`http://localhost:5000/api/v1/employee/delete`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${JSON.parse(token).accessToken}`,
+            },
+            body: JSON.stringify({ employee_id: data.id }),
+        })
+            .then((response) => {
+                console.log(response);
+                navigate("/employees");
+            })
+            .catch((error) => console.error("Error:", error));
+    };
 
     const ActionData = [
         { name: "Generate Report", fn: reportFn },
