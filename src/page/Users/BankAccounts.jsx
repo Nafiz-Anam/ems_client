@@ -38,7 +38,11 @@ const BankAccounts = () => {
 
     return (
         <div className="">
-            <TableHeader title={"Bank Accounts"} />
+            <TableHeader
+                title={"Bank Accounts"}
+                button_title="Add Bank Details"
+                link="/employees/create/bank-details"
+            />
             <Container>
                 <div className="md:flex mb-[37px] mt-[30px] items-center justify-between">
                     <div className="mb-4 md:mb-0">

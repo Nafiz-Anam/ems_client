@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
+import CreateSalaryPayout from "../page/Payouts/AddPayout";
 
 const App = lazy(() => import("../App"));
 const Home = lazy(() => import("../page/Home"));
@@ -11,6 +12,7 @@ const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
 const CreateEmployee = lazy(() => import("../page/Users/CreateEmployee"));
+const CreateBank = lazy(() => import("../page/Users/AddBank"));
 const ContactDetails = lazy(() => import("../page/Users/ContactDetails"));
 const AcademicDetails = lazy(() => import("../page/Users/AcademicDetails"));
 const KycDetails = lazy(() => import("../page/Users/KycDetails"));
@@ -58,11 +60,13 @@ export const routes = createBrowserRouter([
 
             // payout routes
             { path: "/payouts/*", element: <PayoutTable /> },
+            { path: "/payouts/create", element: <CreateSalaryPayout /> },
             { path: "/payouts/details/:id", element: <PayoutDetails /> },
 
             // users routes
             { path: "/employees/*", element: <Users /> },
             { path: "/employees/create", element: <CreateEmployee /> },
+            { path: "/employees/create/bank-details", element: <CreateBank /> },
             { path: "/employees/bank_accounts", element: <BankAccounts /> },
             { path: "/employees/details/:id", element: <UsersDetails /> },
             {

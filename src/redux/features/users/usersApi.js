@@ -1,5 +1,11 @@
 import { api } from "../../api/apiSlice";
-import { setUsers, setUsersDetails } from "./usersSlice";
+import {
+    setUsers,
+    setUserDrop,
+    setPayouts,
+    setBanks,
+    setUsersDetails,
+} from "./usersSlice";
 
 const usersApi = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -22,6 +28,21 @@ const usersApi = api.injectEndpoints({
                 }
             },
         }),
+        getUsersDropdown: builder.mutation({
+            query: () => ({
+                url: "/employee/list/dropdown",
+                method: "POST",
+                body: {},
+            }),
+            async onQueryStarted(arg, { queryFulfilled, dispatch }) {
+                try {
+                    const result = await queryFulfilled;
+                    dispatch(setUserDrop(result.data.data));
+                } catch (error) {
+                    console.log("error for user api slice", error);
+                }
+            },
+        }),
         getPayouts: builder.mutation({
             query: (data) => ({
                 url: "/payout/list",
@@ -35,7 +56,7 @@ const usersApi = api.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
-                    dispatch(setUsers(result.data.data));
+                    dispatch(setPayouts(result.data.data));
                 } catch (error) {
                     console.log("error for user api slice", error);
                 }
@@ -54,7 +75,7 @@ const usersApi = api.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
-                    dispatch(setUsers(result.data.data));
+                    dispatch(setBanks(result.data.data));
                 } catch (error) {
                     console.log("error for user api slice", error);
                 }
@@ -84,7 +105,7 @@ const usersApi = api.injectEndpoints({
             async onQueryStarted(arg, { queryFulfilled, dispatch }) {
                 try {
                     const result = await queryFulfilled;
-                    dispatch(setUsersDetails(result.data.data));
+                    dispatch(setAccountDetails(result.data.data));
                 } catch (error) {
                     console.log("error for userApi.js", error);
                 }
@@ -139,6 +160,20 @@ const usersApi = api.injectEndpoints({
                 body: data,
             }),
         }),
+        createBank: builder.mutation({
+            query: (data) => ({
+                url: "/employee/add/banks-details",
+                method: "POST",
+                body: data,
+            }),
+        }),
+        createSalaryPayout: builder.mutation({
+            query: (data) => ({
+                url: "/payout/add",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 export const {
@@ -153,5 +188,8 @@ export const {
     useUpdateUserDetailsMutation,
     useUpdateAcademicDetailsMutation,
     useUpdateKycDetailsMutation,
-    useCreateEmployeeMutation
+    useCreateEmployeeMutation,
+    useCreateBankMutation,
+    useGetUsersDropdownMutation,
+    useCreateSalaryPayoutMutation,
 } = usersApi;

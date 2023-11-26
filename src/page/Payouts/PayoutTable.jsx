@@ -48,7 +48,11 @@ const PayoutTable = () => {
 
     return (
         <div className="bg-secondary">
-            <TableHeader title={"All Payouts"} />
+            <TableHeader
+                title={"All Payouts"}
+                link="/payouts/create"
+                button_title="Add Payout"
+            />
             <Container>
                 <div className="md:flex mb-[37px] mt-[30px] items-center justify-between">
                     <div className="mb-4 md:mb-0">
