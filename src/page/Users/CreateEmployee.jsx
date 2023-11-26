@@ -78,9 +78,9 @@ const CreateEmployee = () => {
             }
         });
 
-        if (image) formData.append("id_img1", image);
-        if (image2) formData.append("id_img2", image2);
-        if (image3) formData.append("profile_img", image3);
+        if (image) formData.append("profile_img", image);
+        if (image2) formData.append("id_img1", image2);
+        if (image3) formData.append("id_img2", image3);
         if (image4) formData.append("degree_img", image4);
 
         try {
@@ -497,86 +497,6 @@ const CreateEmployee = () => {
                                         </div>
                                     </div>
                                     <div className="col-span-6 md:col-span-3"></div>
-                                </section>
-
-                                <div className="flex justify-between item-center mt-5">
-                                    <p className="text-xl font-bold capitalize">
-                                        Bank Account Information
-                                    </p>
-                                    <div className="flex items-center gap-2"></div>
-                                </div>
-                                <section className="grid grid-cols-6 gap-4 mt-6">
-                                    <div className="col-span-6 md:col-span-3">
-                                        <div className="">
-                                            <p className="mb-1">Bank Name</p>
-                                            <input
-                                                required
-                                                name="bank_name"
-                                                value={userData.bank_name}
-                                                onChange={handleInputChange}
-                                                type="text"
-                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-span-6 md:col-span-3">
-                                        <div className="">
-                                            <p className="mb-1">
-                                                Account Holder
-                                            </p>
-                                            <input
-                                                required
-                                                value={userData.account_holder}
-                                                onChange={handleInputChange}
-                                                type="text"
-                                                name="account_holder"
-                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-span-6 md:col-span-3">
-                                        <div className="">
-                                            <p className="mb-1">
-                                                Account Number
-                                            </p>
-                                            <input
-                                                required
-                                                value={userData.account_number}
-                                                onChange={handleInputChange}
-                                                type="text"
-                                                name="account_number"
-                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-span-6 md:col-span-3">
-                                        <div className="">
-                                            <p className="mb-1">Bank Branch</p>
-                                            <input
-                                                required
-                                                value={userData.bank_branch}
-                                                onChange={handleInputChange}
-                                                type="text"
-                                                name="bank_branch"
-                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="col-span-6 md:col-span-3">
-                                        <div className="">
-                                            <p className="mb-1">
-                                                Bank Swift_code
-                                            </p>
-                                            <input
-                                                required
-                                                value={userData.bank_swift_code}
-                                                onChange={handleInputChange}
-                                                type="text"
-                                                name="bank_swift_code"
-                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
-                                            />
-                                        </div>
-                                    </div>
                                 </section>
 
                                 <button

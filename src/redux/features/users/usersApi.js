@@ -5,6 +5,7 @@ import {
     setPayouts,
     setBanks,
     setUsersDetails,
+    setAccountDetails,
 } from "./usersSlice";
 
 const usersApi = api.injectEndpoints({

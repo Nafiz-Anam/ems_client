@@ -29,6 +29,12 @@ const usersSlices = createSlice({
     },
 });
 
-export const { setUsers, setUserDrop, setPayouts, setBanks, setUsersDetails } =
-    usersSlices.actions;
+export const {
+    setUsers,
+    setUserDrop,
+    setPayouts,
+    setBanks,
+    setUsersDetails,
+    setAccountDetails,
+} = usersSlices.actions;
 export default usersSlices.reducer;

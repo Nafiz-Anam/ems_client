@@ -116,7 +116,7 @@ function TableTemp({
                         />
                     ))}
                     <p className="absolute left-[45%] flex flex-col items-center justify-center mt-10 text-md font-bold text-red-500">
-                        no data found
+                        No Data Found
                     </p>
                     <div className=""></div>
                 </tbody>
