@@ -257,8 +257,8 @@ const UsersDetails = () => {
                                             <p>
                                                 {" "}
                                                 {details.status === "active"
-                                                    ? "Block"
-                                                    : "UnBlock"}{" "}
+                                                    ? "Deactivate"
+                                                    : "Activate"}{" "}
                                             </p>
                                         </div>
                                     </div>

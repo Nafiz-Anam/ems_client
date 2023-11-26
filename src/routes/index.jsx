@@ -1,6 +1,5 @@
 import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import CreateSalaryPayout from "../page/Payouts/AddPayout";
 
 const App = lazy(() => import("../App"));
 const Home = lazy(() => import("../page/Home"));
@@ -9,8 +8,8 @@ const Users = lazy(() => import("../page/Users/UserTable"));
 const PublicRoute = lazy(() => import("./PublicRoute"));
 const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
-const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
+const CreateSalaryPayout = lazy(() => import("../page/Payouts/AddPayout"));
 const CreateEmployee = lazy(() => import("../page/Users/CreateEmployee"));
 const CreateBank = lazy(() => import("../page/Users/AddBank"));
 const ContactDetails = lazy(() => import("../page/Users/ContactDetails"));
@@ -32,7 +31,6 @@ const AddPassword = lazy(() => import("../page/Auth/AddPassword"));
 const PrivacyPolicy = lazy(() => import("../page/Setting/PrivacyPolicy"));
 const ChangePassword = lazy(() => import("../page/Setting/ChangePassword"));
 const TermsCondition = lazy(() => import("../page/Setting/TermsCondition"));
-const JobPostDetails = lazy(() => import("../page/JobPost/JobPostDetails"));
 const SentNotification = lazy(() => import("../page/Setting/SentNotification"));
 
 const GlobalLoader = lazy(() =>
@@ -53,10 +51,6 @@ export const routes = createBrowserRouter([
             // dashboard routes
             { index: true, element: <Home /> },
             { path: "/home", element: <Home /> },
-
-            // job post routes
-            { path: "/job-post/*", element: <JobPost /> },
-            { path: "/job-post/details/:id", element: <JobPostDetails /> },
 
             // payout routes
             { path: "/payouts/*", element: <PayoutTable /> },
