@@ -57,6 +57,34 @@ const UserTable = () => {
         "status",
     ];
 
+    const reportFn = (data) => {
+        fetch(`http://localhost:5000/api/v1/dashboard/generate-report`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ employee_id: data.id }),
+        })
+            .then((response) => response.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = `employee-report-${data.name}.pdf`;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            })
+            .catch((error) => console.error("Error:", error));
+    };
+
+    const deleteFn = (item) => {};
+
+    const ActionData = [
+        { name: "Generate Report", fn: reportFn },
+        { name: "Delete", fn: deleteFn },
+    ];
+
     return (
         <div className="bg-secondary">
             <TableHeader
@@ -88,7 +116,7 @@ const UserTable = () => {
                     >
                         <TableTemp
                             rightPage={rightPage}
-                            btn={false}
+                            btn={true}
                             linkUrl="/employees/details"
                             customID={true}
                             assignLinkOnHeader="profile_img"
@@ -99,6 +127,7 @@ const UserTable = () => {
                             tableHead={tableHead}
                             data={data}
                             fieldsToShow={fieldsToShow}
+                            actionData={ActionData}
                         />
                     </StageLoading>
                 </div>
