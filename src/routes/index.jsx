@@ -10,6 +10,7 @@ const PrivateRoute = lazy(() => import("./PrivateRoute"));
 const AboutUs = lazy(() => import("../page/Setting/AboutUs"));
 const JobPost = lazy(() => import("../page/JobPost/JobPost"));
 const AccountDetails = lazy(() => import("../page/Users/AccountDetails"));
+const CreateEmployee = lazy(() => import("../page/Users/CreateEmployee"));
 const ContactDetails = lazy(() => import("../page/Users/ContactDetails"));
 const AcademicDetails = lazy(() => import("../page/Users/AcademicDetails"));
 const KycDetails = lazy(() => import("../page/Users/KycDetails"));
@@ -61,6 +62,7 @@ export const routes = createBrowserRouter([
 
             // users routes
             { path: "/employees/*", element: <Users /> },
+            { path: "/employees/create", element: <CreateEmployee /> },
             { path: "/employees/bank_accounts", element: <BankAccounts /> },
             { path: "/employees/details/:id", element: <UsersDetails /> },
             {

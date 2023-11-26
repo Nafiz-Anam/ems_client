@@ -132,6 +132,13 @@ const usersApi = api.injectEndpoints({
                 body: data,
             }),
         }),
+        createEmployee: builder.mutation({
+            query: (data) => ({
+                url: "/employee/create",
+                method: "POST",
+                body: data,
+            }),
+        }),
     }),
 });
 export const {
@@ -146,4 +153,5 @@ export const {
     useUpdateUserDetailsMutation,
     useUpdateAcademicDetailsMutation,
     useUpdateKycDetailsMutation,
+    useCreateEmployeeMutation
 } = usersApi;

@@ -59,7 +59,11 @@ const UserTable = () => {
 
     return (
         <div className="bg-secondary">
-            <TableHeader title={"All Employees"} />
+            <TableHeader
+                title={"All Employees"}
+                button_title="Create Employee"
+                link="/employees/create"
+            />
             <Container>
                 <div className="md:flex mb-[37px] mt-[30px] items-center justify-between">
                     <div className="mb-4 md:mb-0">
