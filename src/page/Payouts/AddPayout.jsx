@@ -87,6 +87,8 @@ const CreateSalaryPayout = () => {
                         <div className="grid grid-cols-6 gap-4 mt-6">
                             {/* Employee Dropdown */}
                             <div className="col-span-6">
+                                <p className="mb-1">Employee ID</p>
+
                                 <select
                                     name="employee_id"
                                     value={salaryData.employee_id}
@@ -108,6 +110,7 @@ const CreateSalaryPayout = () => {
                             </div>
                             {/* Month Picker */}
                             <div className="col-span-6">
+                                <p className="mb-1">Salary Month</p>
                                 <DatePicker
                                     selected={salaryData.month}
                                     onChange={handleDateChange}
@@ -118,12 +121,13 @@ const CreateSalaryPayout = () => {
                             </div>
                             {/* Amount Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Salary Amount</p>
+
                                 <input
                                     name="amount"
                                     type="number"
                                     value={salaryData.amount}
                                     onChange={handleInputChange}
-                                    placeholder="Amount"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
@@ -131,7 +135,7 @@ const CreateSalaryPayout = () => {
                         </div>
                         <button
                             type="submit"
-                            className="py-3 mt-8 rounded-md bg-primary text-secondary"
+                            className="py-3 px-5 mt-8 rounded-md bg-primary text-secondary"
                         >
                             Create Salary Payout
                         </button>

@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
+import "react-datepicker/dist/react-datepicker.css";
 import Toast from "../../utils/toast";
 import Container from "../../components/share/ui/Container";
 import TableHeader from "../../components/share/ui/TableHeader";
-import { useCreateBankMutation } from "../../redux/features/users/usersApi";
+import {
+    useCreateBankMutation,
+    useGetUsersDropdownMutation,
+} from "../../redux/features/users/usersApi";
+import { useSelector } from "react-redux";
 
 const CreateBank = () => {
     const navigate = useNavigate();
     const { errorToast } = Toast();
+    const { data } = useSelector((state) => state.users);
 
     const [payoutData, setPayoutData] = useState({
         employee_id: "",
@@ -18,7 +25,20 @@ const CreateBank = () => {
         bank_swift_code: "",
     });
 
-    const [createBank, { isError, isLoading, error }] = useCreateBankMutation();
+    const [createBank] = useCreateBankMutation();
+    const [getUsersDropdown, { isError, isLoading, error }] =
+        useGetUsersDropdownMutation();
+
+    const [employees, setEmployees] = useState(data);
+    const loadDataFn = async () => {
+        const data = await getUsersDropdown();
+        console.log(data);
+        setEmployees(data?.data?.data);
+    };
+
+    useEffect(() => {
+        loadDataFn();
+    }, []);
 
     const handleInputChange = (e) => {
         setPayoutData({ ...payoutData, [e.target.name]: e.target.value });
@@ -56,73 +76,86 @@ const CreateBank = () => {
                     <form onSubmit={handleSubmit} className="my-8">
                         <div className="grid grid-cols-6 gap-4 mt-6">
                             {/* Employee ID Input */}
+                            <p className="mb-1">Employee ID</p>
                             <div className="col-span-6">
-                                <input
+                                <select
                                     name="employee_id"
-                                    type="text"
                                     value={payoutData.employee_id}
                                     onChange={handleInputChange}
-                                    placeholder="Employee ID"
-                                    className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
-                                />
+                                    className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                >
+                                    <option value="">Select Employee</option>
+                                    {employees &&
+                                        employees.map((employee) => (
+                                            <option
+                                                key={employee.id}
+                                                value={employee.id}
+                                            >
+                                                {employee.name}
+                                            </option>
+                                        ))}
+                                </select>
                             </div>
                             {/* Bank Name Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Bank Name</p>
                                 <input
                                     name="bank_name"
                                     type="text"
                                     value={payoutData.bank_name}
                                     onChange={handleInputChange}
-                                    placeholder="Bank Name"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
                             </div>
                             {/* Account Holder Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Account Holder</p>
                                 <input
                                     name="account_holder"
                                     type="text"
                                     value={payoutData.account_holder}
                                     onChange={handleInputChange}
-                                    placeholder="Account Holder"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
                             </div>
                             {/* Account Number Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Account Number</p>
+
                                 <input
                                     name="account_number"
                                     type="text"
                                     value={payoutData.account_number}
                                     onChange={handleInputChange}
-                                    placeholder="Account Number"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
                             </div>
                             {/* Bank Branch Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Bank Branch</p>
+
                                 <input
                                     name="bank_branch"
                                     type="text"
                                     value={payoutData.bank_branch}
                                     onChange={handleInputChange}
-                                    placeholder="Bank Branch"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
                             </div>
                             {/* Bank Swift Code Input */}
                             <div className="col-span-6">
+                                <p className="mb-1">Bank Swift Code</p>
+
                                 <input
                                     name="bank_swift_code"
                                     type="text"
                                     value={payoutData.bank_swift_code}
                                     onChange={handleInputChange}
-                                    placeholder="Bank Swift Code"
                                     className="w-full px-2 py-2 border rounded-md focus:outline-none"
                                     required
                                 />
