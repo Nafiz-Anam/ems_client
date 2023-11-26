@@ -49,6 +49,7 @@ const CreateEmployee = () => {
     const [image, setImage] = useState(null);
     const [image2, setImage2] = useState(null);
     const [image3, setImage3] = useState(null);
+    const [image4, setImage4] = useState(null);
 
     const handleImageChange1 = (newImage) => {
         setImage(newImage);
@@ -62,11 +63,19 @@ const CreateEmployee = () => {
         setImage3(newImage);
     };
 
+    const handleImageChange4 = (newImage) => {
+        setImage4(newImage);
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         Object.keys(userData).forEach((key) => {
-            if (!["id_img1", "id_img2", "profile_img"].includes(key)) {
+            if (
+                !["id_img1", "id_img2", "profile_img", "degree_img"].includes(
+                    key
+                )
+            ) {
                 formData.append(key, userData[key]);
             }
         });
@@ -74,6 +83,7 @@ const CreateEmployee = () => {
         if (image) formData.append("id_img1", image);
         if (image2) formData.append("id_img2", image2);
         if (image3) formData.append("profile_img", image3);
+        if (image4) formData.append("degree_img", image4);
 
         try {
             await createEmployee(formData);
@@ -275,7 +285,7 @@ const CreateEmployee = () => {
                                 <section className="grid grid-cols-6 gap-4 mt-6">
                                     <div className="col-span-12 md:col-span-12">
                                         <div className="">
-                                            <p className="mb-1">Last Degree</p>
+                                            <p className="mb-1">ID Type</p>
                                             <input
                                                 value={userData.id_type}
                                                 onChange={handleInputChange}
@@ -306,6 +316,40 @@ const CreateEmployee = () => {
                                             <ImageUploader
                                                 onImageChange={
                                                     handleImageChange3
+                                                }
+                                            />
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <div className="flex justify-between item-center mt-5">
+                                    <p className="text-xl font-bold capitalize">
+                                        Academic Information
+                                    </p>
+                                    <div className="flex items-center gap-2"></div>
+                                </div>
+                                <section className="grid grid-cols-6 gap-4 mt-6">
+                                    <div className="col-span-12 md:col-span-12">
+                                        <div className="">
+                                            <p className="mb-1">Last Degree</p>
+                                            <input
+                                                value={userData.last_degree}
+                                                onChange={handleInputChange}
+                                                required
+                                                name="last_degree"
+                                                type="text"
+                                                className="w-full px-2 py-2 border rounded-md focus:outline-none"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="col-span-12 md:col-span-12">
+                                        <div className="">
+                                            <p className="mb-1">
+                                                Degree Certificate
+                                            </p>
+                                            <ImageUploader
+                                                onImageChange={
+                                                    handleImageChange4
                                                 }
                                             />
                                         </div>
