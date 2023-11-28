@@ -10,7 +10,6 @@ const Registration = () => {
         useRegisterAccountMutation();
 
     const handleRegister = (e) => {
-        console.log("object");
         e.preventDefault();
         registerAccount({ email: e.target.Email.value });
     };
